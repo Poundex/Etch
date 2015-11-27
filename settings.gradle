@@ -1,0 +1,6 @@
+rootProject.name = 'Etch'
+
+include 'etch-core'
+include 'etch-utils'
+include 'etch-webui'
+include 'etch-app'

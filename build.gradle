@@ -1,0 +1,12 @@
+allprojects {
+	group "net.poundex.etch"
+	version "0.1.0-SNAPSHOT"
+}
+
+ext {
+	grailsVersion = "3.1.0.M2"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.9"
+}
