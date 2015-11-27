@@ -1,8 +1,6 @@
 package net.poundex.etch.dashboard
 
 import grails.transaction.Transactional
-import groovy.transform.CompileStatic
-import groovy.transform.TypeCheckingMode
 import net.poundex.etch.block.BlockRenderer
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -24,7 +22,7 @@ class BlockService
 		}
 	}
 
-	Closure render(SingleBlock block)
+	Closure render(Block block)
 	{
 		return registry[block.class.ID].render(block)
 	}

@@ -20,15 +20,20 @@ class BlockTagLib {
 	    ])
     }
 
-	def doubleBlock = { attrs, body ->
-		out << body(halfBlock: true, bix: 1)
+	/**
+	 * @attr top
+	 * @attr bottom
+	 */
+	def doubleblock = { attrs, body ->
+		out << render(template: 'doubleblock', model: [
+		        top: attrs.top, bottom: attrs.bottom
+		])
 	}
 
 	def renderBlock = { attrs, body ->
 		Block block = attrs.block
 		Closure c = blockService.render(block)
 		c.setDelegate(this)
-//		c.setResolveStrategy(DELEGATE_FIRST)
 		out << c()
 	}
 }

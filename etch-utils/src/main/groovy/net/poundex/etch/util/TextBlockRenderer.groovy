@@ -1,6 +1,5 @@
 package net.poundex.etch.util
 
-import groovy.transform.CompileStatic
 import net.poundex.etch.block.BlockRenderer
 
 /**

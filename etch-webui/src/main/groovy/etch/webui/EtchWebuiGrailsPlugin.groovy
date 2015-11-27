@@ -1,6 +1,7 @@
 package etch.webui
 
 import grails.plugins.*
+import net.poundex.etch.block.DoubleBlockRenderer
 
 class EtchWebuiGrailsPlugin extends Plugin {
 
@@ -41,7 +42,7 @@ Brief summary/description of the plugin.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
     Closure doWithSpring() { {->
-            // TODO Implement runtime spring config (optional)
+            doubleBlockRenderer(DoubleBlockRenderer)
         }
     }
 
