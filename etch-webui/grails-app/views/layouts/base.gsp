@@ -21,6 +21,11 @@
 	<asset:stylesheet src="lib/flexslider.css" />
 
 	<asset:javascript src="lib/jquery-2.1.3.js" />
+	<asset:javascript src="lib/opendolphin.js" />
+
+	<script type="text/javascript">
+		var dolphin = opendolphin.dolphin("http://localhost:8080/dolphin", false);
+	</script>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>

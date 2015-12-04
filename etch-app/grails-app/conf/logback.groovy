@@ -1,3 +1,4 @@
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
 import grails.util.BuildSettings
 import grails.util.Environment
 
@@ -9,6 +10,9 @@ appender('STDOUT', ConsoleAppender) {
 }
 
 root(ERROR, ['STDOUT'])
+logger("grails.app", DEBUG, ['STDOUT'], false)
+logger("net.poundex.etch", DEBUG, ['STDOUT'], false)
+logger("org.opendolphin", DEBUG, ['STDOUT'], false)
 
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir) {

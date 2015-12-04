@@ -1,6 +1,11 @@
 package etch.core
 
 import grails.plugins.*
+import net.poundex.etch.dolphin.DolphinConfiguration
+import org.opendolphin.core.comm.JsonCodec
+import org.opendolphin.core.server.DefaultServerDolphin
+import org.opendolphin.core.server.ServerConnector
+import org.opendolphin.core.server.ServerModelStore
 
 class EtchCoreGrailsPlugin extends Plugin {
 
@@ -41,9 +46,26 @@ Brief summary/description of the plugin.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
     Closure doWithSpring() { {->
-            // TODO Implement runtime spring config (optional)
+        serverDolphin(DefaultServerDolphin, ref('serverModelStore'), ref('serverConnector')) { bean ->
+	        bean.scope = 'session'
         }
-    }
+
+	    serverModelStore(ServerModelStore) { bean ->
+		    bean.scope = 'session'
+	    }
+
+	    serverConnector(ServerConnector) { bean ->
+		    bean.scope = 'request'
+		    codec = ref('jsonCodec')
+		    serverModelStore = ref('serverModelStore')
+	    }
+
+	    jsonCodec(JsonCodec)
+
+	    dolphinConfig(DolphinConfiguration) { bean ->
+		    bean.scope = 'session'
+	    }
+    }}
 
     void doWithDynamicMethods() {
         // TODO Implement registering dynamic methods to classes (optional)
