@@ -1,6 +1,8 @@
 class UrlMappings {
 
     static mappings = {
+        "/dashboard/"(controller: "dashboard", action: "index")
+        "/dashboard/index"(controller: "dashboard", action: "index")
         "/dashboard/$name"(controller: 'dashboard', action: 'dashboard')
 
         "/$controller/$action?/$id?(.$format)?"{

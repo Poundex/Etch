@@ -9,7 +9,6 @@ import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.gmail.GmailScopes
 import net.poundex.etch.google.GoogleAccount
-import org.apache.commons.lang.NotImplementedException
 
 class GoogleLoginService
 {
@@ -25,10 +24,9 @@ class GoogleLoginService
 
 	public String beginAuthorise(GoogleAccount googleAccount)
 	{
-		sessionFlow = createAuthFlow()
 		sessionAccount = googleAccount
 
-		return sessionFlow.newAuthorizationUrl().
+		return flow.newAuthorizationUrl().
 				setApprovalPrompt("force").
 				setAccessType("offline").
 				setRedirectUri("http://local-google-dev.com:8080/googleLogin/auth").
@@ -39,7 +37,7 @@ class GoogleLoginService
 	{
 		if ( ! sessionFlow || ! sessionAccount) throw new IllegalStateException("No account or flow")
 
-		GoogleTokenResponse resp = sessionFlow.
+		GoogleTokenResponse resp = flow.
 				newTokenRequest(code).
 				setRedirectUri("http://local-google-dev.com:8080/googleLogin/auth").
 				execute()
@@ -62,7 +60,7 @@ class GoogleLoginService
 		GoogleTokenResponse resp = new GoogleRefreshTokenRequest(new NetHttpTransport(), new JacksonFactory(), googleAccount.authorisation,
 				CLIENT_ID, CLIENT_SECRET).execute()
 
-		throw new NotImplementedException()
+		return storeCredential(googleAccount, resp)
 	}
 
 	public static boolean isLive(Credential credential)
@@ -84,10 +82,18 @@ class GoogleLoginService
 
 	private Credential storeCredential(GoogleAccount account, TokenResponse response)
 	{
-		Credential credential = sessionFlow.createAndStoreCredential(response, account.username)
+		Credential credential = flow.createAndStoreCredential(response, account.username)
 		credential.refreshToken()
 		sessionCredentialHolder[account] = credential
 		return credential
+	}
+
+	private GoogleAuthorizationCodeFlow getFlow()
+	{
+		if ( ! sessionFlow)
+			sessionFlow = createAuthFlow()
+
+		return sessionFlow
 	}
 }
 

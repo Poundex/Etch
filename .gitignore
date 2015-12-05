@@ -17,7 +17,8 @@ hs_err_pid*
 # Although this should work for most versions of grails, it is
 # suggested that you use the "grails integrate-with --git" command
 # to generate your .gitignore file.
-
+.asscache
+*.db
 # web application files
 /web-app/WEB-INF/classes
 

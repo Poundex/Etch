@@ -7,11 +7,20 @@ import net.poundex.etch.gmail.GmailAccount
 import net.poundex.etch.google.GoogleAccount
 import net.poundex.etch.mail.MailAccount
 import net.poundex.etch.mail.MailBlock
+import net.poundex.etch.util.EtchConfig
 import net.poundex.etch.util.TextBlock
+
+import static net.poundex.etch.util.EtchConfig.EtchConfigVar.TEST_DATA_INSTALLED
 
 class BootStrap {
 
     def init = { servletContext ->
+
+	    if (EtchConfig.get(TEST_DATA_INSTALLED) == "false") installTestData()
+    }
+
+	void installTestData()
+	{
 	    Block one = new TextBlock(title: "One", text: "Text one")
 	    Block two = new TextBlock(title: "Two", text: "Text two")
 	    Block four = new TextBlock(title: "Four", text: "Text four")
@@ -45,7 +54,9 @@ class BootStrap {
 	    dashboard.addToRows row2
 	    dashboard.save(flush:true, failOnError: true)
 
+		EtchConfig.set(TEST_DATA_INSTALLED, "true")
     }
+
     def destroy = {
     }
 
