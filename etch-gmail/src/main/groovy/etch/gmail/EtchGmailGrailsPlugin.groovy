@@ -1,6 +1,8 @@
 package etch.gmail
 
 import grails.plugins.*
+import org.springframework.aop.framework.ProxyFactoryBean
+import org.springframework.aop.scope.ScopedProxyFactoryBean
 
 class EtchGmailGrailsPlugin extends Plugin {
 
@@ -41,7 +43,10 @@ Brief summary/description of the plugin.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
     Closure doWithSpring() { {->
-            // TODO Implement runtime spring config (optional)
+	        googleLoginServiceProxy(ScopedProxyFactoryBean) {
+		        targetBeanName = "etchGmailGoogleLoginService"
+		        proxyTargetClass = true
+	        }
         }
     }
 

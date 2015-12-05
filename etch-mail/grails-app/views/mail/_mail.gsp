@@ -4,7 +4,7 @@
 
 <script>
 
-	dolphin.presentationModel(null, 'etch.mail.mail.pm',
+	dolphin.presentationModel('<%= UUID.randomUUID().toString() %>', 'etch.mail.mail.pm',
 		dolphin.attribute('etch.mail.mailAccount.attr', null, ${ mailAccount }),
 		dolphin.attribute('etch.mail.unread.attr', null, '?')
 	).getAt('etch.mail.unread.attr').onValueChange(function(event) {

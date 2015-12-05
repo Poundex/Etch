@@ -24,7 +24,7 @@
 	<asset:javascript src="lib/opendolphin.js" />
 
 	<script type="text/javascript">
-		var dolphin = opendolphin.dolphin("http://localhost:8080/dolphin", false);
+		var dolphin = opendolphin.dolphin("http://local-google-dev.com:8080/dolphin", false);
 	</script>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->

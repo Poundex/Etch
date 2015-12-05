@@ -55,7 +55,7 @@ Brief summary/description of the plugin.
 	    }
 
 	    serverConnector(ServerConnector) { bean ->
-		    bean.scope = 'request'
+		    bean.scope = 'session'
 		    codec = ref('jsonCodec')
 		    serverModelStore = ref('serverModelStore')
 	    }
