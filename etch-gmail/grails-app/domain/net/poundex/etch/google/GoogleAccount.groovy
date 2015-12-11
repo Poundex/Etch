@@ -1,12 +1,12 @@
 package net.poundex.etch.google
 
 import net.poundex.etch.core.Credentials
+import net.poundex.etch.core.Secret
 
 class GoogleAccount extends Credentials
 {
 	String username
-//	GoogleRefreshToken authorisation
-	String authorisation
+	Secret authorisation
 
 	static constraints = {
 		username()

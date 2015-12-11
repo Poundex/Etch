@@ -33,7 +33,7 @@ class BootStrap {
 
 	    Block five = new TextBlock(title: "next row", text: "blah")
 
-	    Credentials googleAccount = new GoogleAccount(username: "mail@poundex.net")
+	    Credentials googleAccount = new GoogleAccount(name: "Mine", username: "mail@poundex.net")
 	    save googleAccount
 	    MailAccount mailAccount = new GmailAccount(name: 'mail@poundex.net', googleAccount: googleAccount)
 	    save mailAccount

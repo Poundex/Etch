@@ -43,6 +43,8 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     compile 'org.open-dolphin:dolphin-server:1.0-RC1'
+	compile "org.grails.plugins:hibernate"
+	compile "org.grails.plugins:jasypt-encryption:2.0.1"
 
 }
 

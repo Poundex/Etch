@@ -8,6 +8,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.gmail.GmailScopes
+import net.poundex.etch.core.Secret
 import net.poundex.etch.google.GoogleAccount
 
 class GoogleLoginService
@@ -42,7 +43,8 @@ class GoogleLoginService
 				setRedirectUri("http://local-google-dev.com:8080/googleLogin/auth").
 				execute()
 
-		sessionAccount.authorisation = resp.getRefreshToken()
+		if (sessionAccount.authorisation) sessionAccount.authorisation.delete()
+		sessionAccount.authorisation = Secret.of(resp.getRefreshToken())
 		sessionAccount.save()
 
 		storeCredential(sessionAccount, resp)
@@ -57,7 +59,7 @@ class GoogleLoginService
 		if( ! googleAccount.authorisation)
 			throw new IllegalStateException("This google account is not authed")
 
-		GoogleTokenResponse resp = new GoogleRefreshTokenRequest(new NetHttpTransport(), new JacksonFactory(), googleAccount.authorisation,
+		GoogleTokenResponse resp = new GoogleRefreshTokenRequest(new NetHttpTransport(), new JacksonFactory(), googleAccount.authorisation.secret,
 				CLIENT_ID, CLIENT_SECRET).execute()
 
 		return storeCredential(googleAccount, resp)
