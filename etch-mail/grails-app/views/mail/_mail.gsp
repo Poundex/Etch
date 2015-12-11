@@ -1,14 +1,16 @@
+<g:set var="myUUID" value="${ UUID.randomUUID().toString() }" />
+
 <etch:block title="${ title }">
-	<div id="thing"></div>
+	<h2 class="text-center"><i class="fa fa-envelope"></i> <span id="${ myUUID }"></span></h2>
 </etch:block>
 
 <script>
 
-	dolphin.presentationModel('<%= UUID.randomUUID().toString() %>', 'etch.mail.mail.pm',
+	dolphin.presentationModel('${ myUUID }', 'etch.mail.mail.pm',
 		dolphin.attribute('etch.mail.mailAccount.attr', null, ${ mailAccount }),
 		dolphin.attribute('etch.mail.unread.attr', null, '?')
 	).getAt('etch.mail.unread.attr').onValueChange(function(event) {
-		$('#thing').html(event.newValue);
+		$('#${ myUUID }').html(event.newValue);
 	});
 
 </script>

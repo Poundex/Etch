@@ -19,6 +19,7 @@
 	<asset:stylesheet src="lib/blocks.css" />
 	<asset:stylesheet src="lib/font-style.css" />
 	<asset:stylesheet src="lib/flexslider.css" />
+	<asset:stylesheet src="lib/font-awesome.css" />
 
 	<asset:javascript src="lib/jquery-2.1.3.js" />
 	<asset:javascript src="lib/opendolphin.js" />
