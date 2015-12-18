@@ -22,6 +22,7 @@
 	<asset:stylesheet src="lib/font-awesome.css" />
 
 	<asset:javascript src="lib/jquery-2.1.3.js" />
+	<asset:javascript src="lib/moment.js" />
 	<asset:javascript src="lib/opendolphin.js" />
 
 	<script type="text/javascript">

@@ -1,4 +1,9 @@
+import net.poundex.etch.ci.JenkinsAPICredentials
+import net.poundex.etch.ci.JenkinsJob
+import net.poundex.etch.ci.JenkinsServer
+import net.poundex.etch.ci.SingleBuildBlock
 import net.poundex.etch.core.Credentials
+import net.poundex.etch.core.Secret
 import net.poundex.etch.dashboard.Block
 import net.poundex.etch.dashboard.Dashboard
 import net.poundex.etch.dashboard.DoubleBlock
@@ -39,6 +44,15 @@ class BootStrap {
 	    save mailAccount
 	    Block six = new MailBlock(mailAccount: mailAccount)
 
+		Credentials jenkinsCredentials = new JenkinsAPICredentials(name: "Local Jenkins", username: "none", apiKey: Secret.of("none"))
+		save jenkinsCredentials
+		JenkinsServer jenkinsServer = new JenkinsServer(credentials: jenkinsCredentials, name: "Local Jenkins",
+				endpointURL: "http://localhost:8180/jenkins")
+		save jenkinsServer
+		JenkinsJob job = new JenkinsJob(jenkinsServer: jenkinsServer, name: "Test 1")
+		save job
+		Block seven = new SingleBuildBlock(ciJob: job)
+
 	    Row row = new Row()
 	    row.addToBlocks one
 	    row.addToBlocks two
@@ -48,6 +62,7 @@ class BootStrap {
 	    Row row2 = new Row()
 	    row.addToBlocks five
 	    row.addToBlocks six
+	    row.addToBlocks seven
 
 	    Dashboard dashboard = new Dashboard(name: "Dashboard")
 	    dashboard.addToRows row
